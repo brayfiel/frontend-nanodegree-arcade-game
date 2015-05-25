@@ -1,3 +1,62 @@
 body {
     text-align: center;
 }
+
+.grid {
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.row {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.cropPlayer {
+    width: 40px;
+    height: 60px;
+    margin: -15px 0 -5px 0;
+    overflow: hidden;
+}
+
+.cropGem {
+    width: 35px;
+    height: 30px;
+    margin: -5px 0 -5px 0;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25.00%;
+}
+
+.col-6 {
+    width: 50.00%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+.difficultyButton{
+	width:175px;
+	height:30px;
+}
+
+.playerButton{
+	width:100px;
+}
+
+.controls {
+    text-align: left;
+}
+

@@ -21,13 +21,15 @@ var Engine = (function(global) {
      */
     var doc = global.document,
         win = global.window,
+        div = doc.getElementById("gameBoard"),
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
 
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
+    //doc.body.appendChild(canvas);
+    div.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -80,7 +82,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* This is called by the update function  and loops through all of the
@@ -89,13 +91,74 @@ var Engine = (function(global) {
      * player object. These update methods should focus purely on updating
      * the data/properties related to  the object. Do your drawing in your
      * render methods.
+     * Update expanded to include gem updates.  The max number of gems allowed
+     * is based on the size of the gem array.  A gem is "created" by making it 
+     * active.  Only inactive gems can be made active.
      */
     function updateEntities(dt) {
+        var looper;
+        if (player.lives > 0) {
+            allEnemies.forEach(function(enemy) {
+                enemy.update(dt);
+            });
+            if (Math.round(Math.random() * 500) == 25){
+                looper = 0;
+                while (looper < allGems.length){
+                    if (!allGems[looper].active){
+                        allGems[looper].activate();
+                        looper = allGems.length;
+                    } else {
+                        looper = looper + 1;
+                    }
+                };
+            };
+            player.update();
+        } else {
+            gameOver.update(dt);
+        };
+    };
+
+    /* This is called by the update function  and loops through all of the
+     * objects within your allEnemies array as defined in app.js and calls
+     * their collision() method. It will then call the update function for your
+     * player object. These update methods should focus purely on updating
+     * the data/properties related to  the object. Do your drawing in your
+     * render methods.
+     */
+    function checkCollisions() {
         allEnemies.forEach(function(enemy) {
-            enemy.update(dt);
+            /* testing to see if a bug touches a player.  These top, bottom, left, right 
+             * methods trim off the dead space between the edge of a graphic and the real
+             * graphic. 
+             */
+            if (((player.top() >= enemy.top() && player.top() <= enemy.bottom()) ||
+                (player.bottom() >= enemy.top() && player.bottom() <= enemy.bottom())) &&
+                ((player.left() >= enemy.left() && player.left() <= enemy.right()) ||
+                (player.right() >= enemy.left() && player.right() <= enemy.right()))){
+
+                console.log("HIT BUG: enemy.top = " + enemy.top() + " enemy.bottom = " + enemy.bottom() +
+                    " enemy.left = " + enemy.left() + " enemy.right = " + enemy.right() +
+                    " player.top = " + player.top() + " player.bottom = " + player.bottom() +
+                    " player.left = " + player.left() + " player.right = "  + player.right()
+                    );
+
+                player.dead();
+            };
+            player.update();
         });
-        player.update();
-    }
+        /* loops through the gem array to determine if a player landed on a gem.
+         * when landed on the gem.dead() method is called.  Here the test is simpler as you 
+         * only need to test of the gem center falls with in the player.
+         */
+        allGems.forEach(function(gem) {
+            if ((gem.centerX() >= player.left() && gem.centerX() <= player.right()) &&
+                (gem.centerY() >= player.top() && gem.centerY() <= player.bottom()) &&
+                gem.active){
+                gem.dead();
+            };
+            player.update();
+        });
+    };
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -147,13 +210,22 @@ var Engine = (function(global) {
     function renderEntities() {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
+         * Added loop for the gem array along with the banner render and game
+         * over rendering.
          */
-        allEnemies.forEach(function(enemy) {
-            enemy.render();
-        });
-
-        player.render();
-    }
+        if (player.lives >= 1){
+            allEnemies.forEach(function(enemy) {
+                enemy.render();
+            });
+            allGems.forEach(function(gem) {
+                gem.render();
+            });
+            player.render();
+            banner.render();
+        } else {
+            gameOver.render();
+        };
+    };
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
@@ -172,7 +244,18 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/game-over-bug.png',
+        'images/Gem Blue.png', 
+        'images/Gem Green.png',
+        'images/Gem Orange.png', 
+        'images/Heart.png',
+        'images/Key.png', 
+        'images/Star.png',
+        'images/enemy-bug-reverse.png'
     ]);
     Resources.onReady(init);
 

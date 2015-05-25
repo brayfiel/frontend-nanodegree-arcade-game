@@ -6,6 +6,121 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<div class="grid">
+	    <div class="row">
+	        <div id="gameTitle" class="col-12">
+	        		<h1>SUPER BUGGER</h1>
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div id="gameOptions" class="col-3">
+			    <u>Game Options</u>
+			    <br><br>
+				Difficulty
+				<br><br>
+				<button type="button" onclick=loadBugs(3) class="difficultyButton">
+					Easy - Up to 3 Bugs
+				</button>
+				<br><br>
+				<button type="button" onclick=loadBugs(6) class="difficultyButton">
+					Medium - Up to 6 Bugs
+				</button>
+				<br><br>
+				<button type="button" onclick=loadBugs(9) class="difficultyButton">
+					Hard - Up to 9 Bugs
+				</button>
+				<br><br>
+				<button type="button" onclick=loadBugs(18) class="difficultyButton">
+					Suicidal - Up to 18 Bugs
+				</button>
+				<br><br><br>
+				Set Player
+				<br><br>
+				<button type="button" onclick=changePlayerSprite("images/char-boy.png") class="playerButton">
+					<img src="images/char-boy.png" alt="Boy" class="cropPlayer">
+				</button>
+				<br><br>
+				<button type="button" onclick=changePlayerSprite("images/char-cat-girl.png") class="playerButton">
+					<img src="images/char-cat-girl.png" alt="Cat Girl" class="cropPlayer">
+				</button>
+				<br><br>
+				<button type="button" onclick=changePlayerSprite("images/char-horn-girl.png") class="playerButton">
+					<img src="images/char-horn-girl.png" alt="Horn Girl" class="cropPlayer">
+				</button>
+				<br><br>
+				<button type="button" onclick=changePlayerSprite("images/char-pink-girl.png") class="playerButton">
+					<img src="images/char-pink-girl.png" alt="Pink Girl" class="cropPlayer">
+				</button>
+			</div>
+	        <div id="gameBoard" class="col-6"></div>
+	        <div id="gameScore" class="col-3">
+		        <form>
+		        	<table>
+			        	<tr>
+				        	<td>Score:</td>
+				        	<td><input type="text" id="playerScore"></td>
+				        </tr>
+			    	    <tr>
+			        		<td>Lives:</td>
+			        		<td><input type="text" id="playerLives"></td>
+			        	</tr>
+			        	<tr>
+			        		<td><img src="images/Gem Blue.png" alt="Blue Gem" class="cropGem"></td>
+			        		<td><input type="text" id="blueGems"></td>
+			        	</tr>
+			        	<tr>
+			        		<td><img src="images/Gem Green.png" alt="Green Gem" class="cropGem"></td>
+			        		<td><input type="text" id="greenGems"></td>
+			        	</tr>
+			        	<tr>
+			        		<td><img src="images/Gem Orange.png" alt="Orange Gem" class="cropGem"></td>
+			        		<td><input type="text" id="orangeGems"></td>
+			        	</tr>
+			        </table>
+    				<br><br>
+    				Scoring<p>
+		        	<table>
+		        		<tr>
+	    					<td><img src="images/water-block.png" alt="Water" class="cropGem"></td>
+	    					<td>100 points</td>
+	    				</tr>
+		        		<tr>
+	    					<td><img src="images/Gem Blue.png" alt="Blue Gem" class="cropGem"></td>
+	    					<td>25 points</td>
+	    				</tr>
+		        		<tr>
+	    					<td><img src="images/Gem Green.png" alt="Green Gem" class="cropGem"></td>
+	    					<td>50 points</td>
+	    				</tr>
+		        		<tr>
+	    					<td><img src="images/Gem Orange.png" alt="Orange Gem" class="cropGem"></td>
+	    					<td>75 points</td>
+    					</tr>
+    				</table>
+    				<br><br>
+    				Controls<p>
+		        	<table class="controls">
+		        		<tr>
+	    					<td>Up Arrow:</td>
+	    					<td>Move Forward</td>
+	    				</tr>
+		        		<tr>
+	    					<td>Down Arrow:</td>
+	    					<td>Move Back</td>
+	    				</tr>
+		        		<tr>
+	    					<td>Right Arrow:</td>
+	    					<td>Move Right</td>
+	    				</tr>
+		        		<tr>
+	    					<td>Left Arrow:</td>
+	    					<td>Move Left</td>
+    					</tr>
+    				</table>
+			    </form>
+	        </div>
+	    </div>
+	</div>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>

@@ -59,7 +59,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
-    };
+    }
 
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
@@ -110,13 +110,13 @@ var Engine = (function(global) {
                     } else {
                         looper = looper + 1;
                     }
-                };
-            };
+                }
+            }
             player.update();
         } else {
             gameOver.update(dt);
-        };
-    };
+        }
+    }
 
     /* This is called by the update function  and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -136,14 +136,8 @@ var Engine = (function(global) {
                 ((player.left() >= enemy.left() && player.left() <= enemy.right()) ||
                 (player.right() >= enemy.left() && player.right() <= enemy.right()))){
 
-                console.log("HIT BUG: enemy.top = " + enemy.top() + " enemy.bottom = " + enemy.bottom() +
-                    " enemy.left = " + enemy.left() + " enemy.right = " + enemy.right() +
-                    " player.top = " + player.top() + " player.bottom = " + player.bottom() +
-                    " player.left = " + player.left() + " player.right = "  + player.right()
-                    );
-
                 player.dead();
-            };
+            }
             player.update();
         });
         /* loops through the gem array to determine if a player landed on a gem.
@@ -155,10 +149,10 @@ var Engine = (function(global) {
                 (gem.centerY() >= player.top() && gem.centerY() <= player.bottom()) &&
                 gem.active){
                 gem.dead();
-            };
+            }
             player.update();
         });
-    };
+    }
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -224,8 +218,8 @@ var Engine = (function(global) {
             banner.render();
         } else {
             gameOver.render();
-        };
-    };
+        }
+    }
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
